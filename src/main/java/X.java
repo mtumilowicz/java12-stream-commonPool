@@ -2,9 +2,6 @@ import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 
-/**
- * Created by mtumilowicz on 2019-07-30.
- */
 public class X {
 
     static int transform(int number) {
