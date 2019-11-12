@@ -60,4 +60,28 @@
     * this practice violates a fundamental principle of good programming in not separating a caller from the 
     external processing
 * `-Djava.util.concurrent.ForkJoinPool.common.parallelism=100`
-* 
+* we could run stream on a dedicated thread pool
+    ```
+    given:
+    def nums = 1..10
+  
+    and:
+    def stream = nums.stream()
+            .parallel()
+            .map { printThreads() }
+    
+    when:
+    process(stream) // it doesn't really matter where you create the stream but where you invoke terminal operation
+  
+    then 'on my pc':
+    Thread[ForkJoinPool-1-worker-101,5,main]
+    Thread[ForkJoinPool-1-worker-17,5,main]
+    Thread[ForkJoinPool-1-worker-3,5,main]
+    Thread[ForkJoinPool-1-worker-59,5,main]
+    Thread[ForkJoinPool-1-worker-73,5,main]
+    Thread[ForkJoinPool-1-worker-45,5,main]
+    Thread[ForkJoinPool-1-worker-75,5,main]
+    Thread[ForkJoinPool-1-worker-87,5,main]
+    Thread[ForkJoinPool-1-worker-89,5,main]
+    Thread[ForkJoinPool-1-worker-117,5,main]
+    ```
