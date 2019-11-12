@@ -46,7 +46,7 @@
     produces (on my pc):
     ```
     Thread[ForkJoinPool.commonPool-worker-7,5,main]
-    Thread[Test worker,5,main] // note that main thread interferes
+    Thread[Test worker,5,main] // note that submitting thread interferes
     Thread[ForkJoinPool.commonPool-worker-13,5,main]
     Thread[ForkJoinPool.commonPool-worker-11,5,main]
     Thread[ForkJoinPool.commonPool-worker-9,5,main]
