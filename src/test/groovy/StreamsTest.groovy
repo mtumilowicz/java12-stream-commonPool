@@ -12,7 +12,7 @@ class StreamsTest extends Specification {
         def processors = Runtime.getRuntime().availableProcessors()
         def poolSize = ForkJoinPool.commonPool().parallelism
 
-        expect: 'differs at 1 thread, main'
+        expect: 'differs at 1 thread, submitting thread'
         processors - 1 == poolSize
     }
 
