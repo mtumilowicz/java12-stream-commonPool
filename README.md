@@ -85,3 +85,12 @@
     Thread[ForkJoinPool-1-worker-89,5,main]
     Thread[ForkJoinPool-1-worker-117,5,main]
     ```
+    where:
+    ```
+    static void process(stream) throws InterruptedException {
+        def pool = new ForkJoinPool(50)
+        pool.submit { stream.forEach {} }
+        pool.shutdown()
+        pool.awaitTermination(30, TimeUnit.SECONDS)
+    }
+    ```
