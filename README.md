@@ -1,6 +1,62 @@
 # java12-stream-commonPool
 
-
 * https://www.youtube.com/watch?v=IwJ-SCfXoAU
-* 54.12 - size of common pool, 55.49 - main is actually a part of it
-* `-Djava.util.concurrent.ForkJoinPool.common.parallelism=100` // try to avoid it
+* https://blog.krecan.net/2014/03/18/how-to-specify-thread-pool-for-java-8-parallel-streams/
+
+## preface
+* https://github.com/mtumilowicz/fork-join-find-minimum
+* https://github.com/mtumilowicz/java11-spliterator-forkjoin
+* `ForkJoinPool` - `ExecutorService` for running `ForkJoinTasks`
+    * is used by any `ForkJoinTask` that is not explicitly submitted to a specified pool
+* `ForkJoinTask` - is a thread-like entity that is much lighter weight than a normal thread
+    * is a lightweight form of `Future`
+    * computational task calculating pure functions or operating on purely isolated objects
+    * primary coordination mechanisms are 
+        * `fork` - arranges to asynchronously execute this task in the pool the current task is running 
+                       in, if applicable, or using the `ForkJoinPool.commonPool()` if not in `ForkJoinPool`
+        * `join` - doesn't proceed until the task's result has been computed
+
+## project description
+* common `ForkJoinPool` supports parallel streams and `CompletableFuture`
+* common pool is common for the whole application, so there is possibility of saturation
+* common pool size vs available processors
+    ```
+    given:
+    def processors = Runtime.getRuntime().availableProcessors()
+    def poolSize = ForkJoinPool.commonPool().parallelism
+
+    expect: 'differs at 1 thread, main'
+    processors - 1 == poolSize
+    ```
+* parallel - using fork-join pool
+    ```
+    given:
+    def nums = 1..10
+
+    when:
+    def threads = nums.stream()
+            .parallel()
+            .map { extractThreads() }
+            .collect Collectors.toSet()
+    
+    then:
+    println threads
+    ```
+    produces (on my pc):
+    ```
+    Thread[ForkJoinPool.commonPool-worker-7,5,main]
+    Thread[Test worker,5,main] // note that main thread interferes
+    Thread[ForkJoinPool.commonPool-worker-13,5,main]
+    Thread[ForkJoinPool.commonPool-worker-11,5,main]
+    Thread[ForkJoinPool.commonPool-worker-9,5,main]
+    Thread[ForkJoinPool.commonPool-worker-5,5,main]
+    Thread[ForkJoinPool.commonPool-worker-15,5,main]
+    Thread[ForkJoinPool.commonPool-worker-3,5,main]
+    ```
+* drawbacks of mixing threads from a pool with a submitting thread:
+    * http://coopsoft.com/ar/Calamity2Article.html#submit
+    * submitting thread’s stack is contaminated with work that should be independent of it
+    * this practice violates a fundamental principle of good programming in not separating a caller from the 
+    external processing
+* `-Djava.util.concurrent.ForkJoinPool.common.parallelism=100`
+* 
