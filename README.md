@@ -40,11 +40,7 @@
             .map { extractThreads() }
             .collect Collectors.toSet()
     
-    then:
-    println threads
-    ```
-    produces (on my pc):
-    ```
+    then: 'on my pc'
     Thread[ForkJoinPool.commonPool-worker-7,5,main]
     Thread[Test worker,5,main] // note that submitting thread interferes
     Thread[ForkJoinPool.commonPool-worker-13,5,main]
@@ -73,7 +69,7 @@
     when:
     process(stream) // it doesn't really matter where you create the stream but where you invoke terminal operation
   
-    then 'on my pc':
+    then: 'on my pc'
     Thread[ForkJoinPool-1-worker-101,5,main]
     Thread[ForkJoinPool-1-worker-17,5,main]
     Thread[ForkJoinPool-1-worker-3,5,main]
