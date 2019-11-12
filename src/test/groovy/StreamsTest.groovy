@@ -7,7 +7,7 @@ import java.util.stream.Stream
 
 class StreamsTest extends Specification {
 
-    def 'common pool size - available processor = 1'() {
+    def 'common pool size vs available processors'() {
         given:
         def processors = Runtime.getRuntime().availableProcessors()
         def poolSize = ForkJoinPool.commonPool().parallelism
@@ -26,13 +26,13 @@ class StreamsTest extends Specification {
                 .collect Collectors.toSet()
 
         then:
-        println threads
+        threads.each { println it }
 
         then:
         1 == 1
     }
 
-    def "parallel - using fork-join pool"() {
+    def 'parallel - using fork-join pool'() {
         given:
         def nums = 1..10
 
@@ -43,7 +43,7 @@ class StreamsTest extends Specification {
                 .collect Collectors.toSet()
 
         then:
-        println threads
+        threads.each { println it }
 
         then:
         1 == 1
