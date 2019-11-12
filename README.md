@@ -2,6 +2,7 @@
 
 * https://www.youtube.com/watch?v=IwJ-SCfXoAU
 * https://blog.krecan.net/2014/03/18/how-to-specify-thread-pool-for-java-8-parallel-streams/
+* http://coopsoft.com/ar/Calamity2Article.html#submit
 
 ## preface
 * https://github.com/mtumilowicz/fork-join-find-minimum
