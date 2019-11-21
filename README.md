@@ -94,5 +94,9 @@
         pool.awaitTermination(30, TimeUnit.SECONDS)
     }
     ```
-    note that:
-    > Note, however, that this technique of submitting a task to a fork-join pool to run the parallel stream in that pool is an implementation "trick" and is not guaranteed to work. Indeed, the threads or thread pool that is used for execution of parallel streams is unspecified. By default, the common fork-join pool is used, but in different environments, different thread pools might end up being used. (Consider a container within an application server.)
+    > Note, however, that this technique of submitting a task to a fork-join pool to run the parallel stream in that 
+    pool is an implementation "trick" and is not guaranteed to work. Indeed, the threads or thread pool that is used 
+    for execution of parallel streams is unspecified. By default, the common fork-join pool is used, but in different 
+    environments, different thread pools might end up being used. (Consider a container within an application server.)
+
+    > Stuart Marks
