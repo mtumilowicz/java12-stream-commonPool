@@ -3,6 +3,7 @@
 # java12-stream-commonPool
 
 * [Parallel and Asynchronous Programming with Streams and CompletableFuture by Venkat Subramaniam](https://www.youtube.com/watch?v=IwJ-SCfXoAU)
+* [[VDZ19] The Dark Side of Java 8 - Lessons Learned by Grzegorz Piwowarek](https://www.youtube.com/watch?v=YVhc6E_GJ1E)
 * https://blog.krecan.net/2014/03/18/how-to-specify-thread-pool-for-java-8-parallel-streams/
 * http://coopsoft.com/ar/Calamity2Article.html#submit
 * https://stackoverflow.com/questions/28985704/parallel-stream-from-a-hashset-doesnt-run-in-parallel
